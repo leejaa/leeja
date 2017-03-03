@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<insert id="createOne" parameterType="java.util.HashMap">
+		insert into review values(#{WRITER}, #{CONTENT}, #{IP}, sysdate )
+	</insert>
+	<select id="readAll" resultType="java.util.HashMap">
+		select * from review order by writedate desc
+	</select>
+	<select id="readFreeboard" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from freeboard where num between #{start} and #{end} order by num desc
+	</select>
+	<select id="cntFreeboard" resultType="java.lang.Integer">
+		select count(*) from freeboard
+	</select>
+	<insert id="writeFreeboard" parameterType="java.util.HashMap">
+		insert into freeboard values(freeboard_seq.nextval,#{WRITER},#{CATEGORY},#{TITLE},#{CONTENT},sysdate,0,0)
+	</insert>
+	<select id="readOne" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from freeboard where num=#{NUM}
+	</select>
+	<update id="like" parameterType="java.util.HashMap">
+		update freeboard set HITCOUNT = HITCOUNT+#{like}
+	</update>
+	<select id="readMessage" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from message where receiver=#{receiver}
+	</select>
+	<insert id="createMessage" parameterType="java.util.HashMap">
+		insert into message values(#{id},#{content},sysdate,#{receiver})
+	</insert>
+	<update id="updateFreeboard" parameterType="java.util.HashMap">
+		update freeboard set category=#{category},title=#{title},content=#{content} where num=#{num}
+	</update>
+	<insert id="fileUpload" parameterType="java.util.HashMap">
+		insert into sharing values(sharing_seq.nextval,#{title},#{filename},#{filesize},#{fileaddress},#{filelink},0)
+	</insert>
+	<select id="readFiles" resultType="java.util.HashMap">
+		select * from sharing
+	</select>
+	<select id="readFile" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+		select * from sharing where num=#{num }
+	</select>
+	<update id="increaseCount" parameterType="java.lang.Integer">
+		update sharing set count = count +1 where num=#{num }
+	</update>
+</mapper>

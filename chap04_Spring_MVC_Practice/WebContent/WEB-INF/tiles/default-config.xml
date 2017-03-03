@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- /views/template.jsp를 기반으로 타일을 조립해서 .. t_01 이란 타일 등록 -->
+	<definition name="default" template="/views/template.jsp">
+		<put-attribute name="title" value="SPRING TILES" />
+		<put-attribute name="header" value="/views/header.jsp" />
+		<put-attribute name="footer" value="/views/footer.jsp" />
+	</definition>
+	<definition name="t_04" extends="default">
+		<put-attribute name="main">
+			<definition template="/views/sub_template.jsp">
+				<put-attribute name="left" value="/views/footer.jsp"/>
+				<put-attribute name="right" value="/views/review/new.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	
+	
+	<definition name="t_03" extends="default">
+		<put-attribute name="title" value="SPRING REVIEW" />
+		<put-attribute name="main" value="/views/review/new.jsp" />
+	</definition>
+	
+	<definition name="t_01" template="/views/template.jsp">
+		<put-attribute name="title" value="tile01" />
+		<put-attribute name="header" value="/views/review/new.jsp" />
+		<put-attribute name="main" value="/views/review/new.jsp" />
+		<put-attribute name="footer" value="/views/review/new.jsp" />
+	</definition>
+	<!-- /views/template.jsp를 기반으로 타일을 조립해서 .. t_02 이란 타일 등록 -->
+	<definition name="t_02" template="/views/template.jsp">
+		<put-attribute name="title" value="리뷰" />
+		<put-attribute name="header" value="/views/header.jsp" />
+		<put-attribute name="main" value="/views/review/all.jsp" />
+		<put-attribute name="footer" value="/views/footer.jsp" />
+	</definition>
+
+
+</tiles-definitions>
